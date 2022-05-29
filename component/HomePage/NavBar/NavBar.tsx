@@ -1,6 +1,9 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import Image from "next/image";
 import classes from "./nav-bar.module.css";
+import CartContext from "../../../common/context/CartContext";
+import { getAbsoluteImagePath } from "../../../helpers/image-utils";
+import { MENU_ITEMS_IMGS_DIRECTORY } from "../Menu/Menu";
 
 type Props = {};
 
@@ -8,6 +11,9 @@ const NavBar = (props: Props) => {
   const [isNavbarActive, setIsNavbarActive] = useState(false);
   const [isSearchFormActive, setIsSearchFormActive] = useState(false);
   const [isCartItemActive, setIsCartItemActive] = useState(false);
+
+  const { cartItems } = useContext(CartContext)
+
 
   useEffect(() => {
     window.onscroll = () => {
@@ -85,59 +91,30 @@ const NavBar = (props: Props) => {
       <div
         className={`${classes.cartItemsContainer} ${isCartItemActive ? "active" : ""
           }`}
-      >
-        <div className={classes.cartItem}>
-          <span className="fas fa-times"></span>
-          <Image
-            src="/asset/images/cart-item-1.png"
-            width={80}
-            height={70}
-            alt=""
-          />
-          <div className={classes.content}>
-            <h3>cart item 01</h3>
-            <div className="price">$15.99/-</div>
-          </div>
-        </div>
-        <div className={classes.cartItem}>
-          <span className="fas fa-times"></span>
-          <Image
-            src="/asset/images/cart-item-2.png"
-            width={80}
-            height={70}
-            alt=""
-          />
-          <div className={classes.content}>
-            <h3>cart item 02</h3>
-            <div className="price">$15.99/-</div>
-          </div>
-        </div>
-        <div className={classes.cartItem}>
-          <span className="fas fa-times"></span>
-          <Image
-            src="/asset/images/cart-item-3.png"
-            width={80}
-            height={70}
-            alt=""
-          />
-          <div className={classes.content}>
-            <h3>cart item 03</h3>
-            <div className="price">$15.99/-</div>
-          </div>
-        </div>
-        <div className={classes.cartItem}>
-          <span className="fas fa-times"></span>
-          <Image
-            src="/asset/images/cart-item-4.png"
-            width={80}
-            height={70}
-            alt=""
-          />
-          <div className={classes.content}>
-            <h3>cart item 04</h3>
-            <div className="price">$15.99/-</div>
-          </div>
-        </div>
+      > {
+          cartItems.map(
+            (cartItem) => {
+
+              const imagePath = getAbsoluteImagePath(cartItem.item.imagePath, MENU_ITEMS_IMGS_DIRECTORY);
+              return (
+                <div key={cartItem.item._id} className={classes.cartItem}>
+                  <span className="fas fa-times"></span>
+                  <Image
+                    src={imagePath}
+                    width={80}
+                    height={70}
+                    alt="cart item"
+                  />
+                  <div className={classes.content}>
+                    <h3>{cartItem.item.name}</h3>
+                    <div className="price">{`$${cartItem.item.currentPrice}/ ${cartItem.quantity}`}</div>
+                  </div>
+                </div>
+              )
+            }
+          )
+        }
+
         <a href="#" className="btn">
           checkout now
         </a>

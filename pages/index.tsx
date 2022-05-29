@@ -1,9 +1,16 @@
+import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { About, Blogs, Contact, Footer, Hero, Menu, NavBar, Products, Review } from "../component/HomePage";
+import { MenuItem } from "../model/Menu";
+import { getMenuItems } from "../services/Menu";
 
+interface HompageProps {
+  menuItems: MenuItem[]
+}
 
-const Home: NextPage = () => {
+const Home: NextPage<HompageProps> = (props) => {
+  const { menuItems } = props;
   return (
     <div>
       <Head>
@@ -21,7 +28,7 @@ const Home: NextPage = () => {
         <Hero />
         <About />
         <Products />
-        <Menu />
+        <Menu menuItems={menuItems} />
         <Review />
         <Contact />
         <Blogs />
@@ -32,5 +39,18 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
+
+export const getStaticProps = async () => {
+  const menuItems = await getMenuItems();
+
+  console.log('menuItems', menuItems);
+
+  return {
+    props: {
+      menuItems: JSON.parse(JSON.stringify(menuItems)),
+    }
+  };
+}
 
 export default Home;
