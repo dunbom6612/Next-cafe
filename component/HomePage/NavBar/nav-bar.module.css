@@ -58,7 +58,7 @@
   transform-origin: top;
 }
 
-.header .searchForm.active {
+.header .searchForm:global(.active) {
   transform: scaleY(1);
 }
 
@@ -92,7 +92,7 @@
   padding: 0 1.5rem;
 }
 
-.header .cartItemsContainer.active {
+.header .cartItemsContainer:global(.active) {
   right: 0;
 }
 
