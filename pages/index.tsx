@@ -2,15 +2,18 @@ import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { About, Blogs, Contact, Footer, Hero, Menu, NavBar, Products, Review } from "../component/HomePage";
+import { getAllBlogs } from "../helpers/blogs-utils";
+import { Blog } from "../model/Blog";
 import { MenuItem } from "../model/Menu";
 import { getMenuItems } from "../services/Menu";
 
 interface HompageProps {
-  menuItems: MenuItem[]
+  menuItems: MenuItem[];
+  blogs: Blog[];
 }
 
 const Home: NextPage<HompageProps> = (props) => {
-  const { menuItems } = props;
+  const { menuItems, blogs } = props;
   return (
     <div>
       <Head>
@@ -31,7 +34,7 @@ const Home: NextPage<HompageProps> = (props) => {
         <Menu menuItems={menuItems} />
         <Review />
         <Contact />
-        <Blogs />
+        <Blogs blogs={blogs} />
         <Footer />
       </main>
 
@@ -43,12 +46,14 @@ const Home: NextPage<HompageProps> = (props) => {
 
 export const getStaticProps = async () => {
   const menuItems = await getMenuItems();
+  const blogs = getAllBlogs();
 
   console.log('menuItems', menuItems);
 
   return {
     props: {
       menuItems: JSON.parse(JSON.stringify(menuItems)),
+      blogs: blogs
     }
   };
 }

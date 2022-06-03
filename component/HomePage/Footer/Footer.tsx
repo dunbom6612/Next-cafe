@@ -13,7 +13,7 @@ const Footer = () => {
         <a href="#" className="fab fa-pinterest"></a>
       </div>
 
-      <div className={classes.links}>
+      {/* <div className={classes.links}>
         <a href="#">home</a>
         <a href="#">about</a>
         <a href="#">menu</a>
@@ -21,7 +21,7 @@ const Footer = () => {
         <a href="#">review</a>
         <a href="#">contact</a>
         <a href="#">blogs</a>
-      </div>
+      </div> */}
 
       <div className={classes.credit}>Design by <span>mr. web designer and re-build it in Nextjs by Huy</span> | all rights reserved</div>
 

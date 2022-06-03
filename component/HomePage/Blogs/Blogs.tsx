@@ -1,51 +1,54 @@
+import moment from 'moment';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
+import { getAbsoluteImagePath } from '../../../helpers/image-utils';
+import { Blog } from '../../../model/Blog';
 import classes from './blogs.module.css'
 
-const Blogs = () => {
+
+interface BlogsProps {
+  blogs: Blog[];
+}
+
+const Blogs = ({ blogs }: BlogsProps) => {
+
+  console.log('blogs', blogs);
+
+
   return (
     <section className={classes.blogs} id="blogs">
 
       <h1 className="heading"> our <span>blogs</span> </h1>
 
       <div className={classes.boxContainer}>
+        {
+          blogs.map(blog => {
 
-        <div className={classes.box}>
-          <div className={classes.image}>
-            <Image width={536} height={250} src="/asset/images/blog-1.jpeg" alt="" />
-          </div>
-          <div className={classes.content}>
-            <a href="#" className={classes.title}>tasty and refreshing coffee</a>
-            <span>by admin / 21st may, 2021</span>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, dicta.</p>
-            <a href="#" className="btn">read more</a>
-          </div>
-        </div>
+            const { slug, excerpt, title, date, author, content } = blog;
+            const parseDate = moment(date, 'YYYY-MM-DD')
+            const imagePath = getAbsoluteImagePath(`/${slug}.jpeg`, `images/blogs/${slug}`)
 
-        <div className={classes.box}>
-          <div className={classes.image}>
-            <Image width={536} height={250} src="/asset/images/blog-2.jpeg" alt="" />
-          </div>
-          <div className={classes.content}>
-            <a href="#" className={classes.title}>tasty and refreshing coffee</a>
-            <span>by admin / 21st may, 2021</span>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, dicta.</p>
-            <a href="#" className="btn">read more</a>
-          </div>
-        </div>
+            console.log('imagePath', imagePath);
 
-        <div className={classes.box}>
-          <div className={classes.image}>
-            <Image width={536} height={250} src="/asset/images/blog-3.jpeg" alt="" />
-          </div>
-          <div className={classes.content}>
-            <a href="#" className={classes.title}>tasty and refreshing coffee</a>
-            <span>by admin / 21st may, 2021</span>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, dicta.</p>
-            <a href="#" className="btn">read more</a>
-          </div>
-        </div>
+            return (
 
+              <div key={blog.slug} className={classes.box}>
+                <div className={classes.image}>
+                  <Image width={536} height={250} src={imagePath} alt="blog image" />
+                </div>
+                <div className={classes.content}>
+                  <a href="#" className={classes.title}>{title}</a>
+                  <span>{`by ${author} / ${parseDate.format('Do MMM, YYYY')}`}</span>
+                  <p>{excerpt}</p>
+                  <Link href={`/blog/${slug}`} className="btn">
+                    <a>read more</a>
+                  </Link>
+                </div>
+              </div>
+            )
+          })
+        }
       </div>
 
     </section>

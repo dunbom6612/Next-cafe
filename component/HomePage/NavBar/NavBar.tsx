@@ -4,10 +4,13 @@ import classes from "./nav-bar.module.css";
 import CartContext from "../../../common/context/CartContext";
 import { getAbsoluteImagePath } from "../../../helpers/image-utils";
 import { MENU_ITEMS_IMGS_DIRECTORY } from "../Menu/Menu";
+import Link from "next/link";
 
-type Props = {};
+type NavBarProps = {
+  isDisableNavigateLink?: boolean
+};
 
-const NavBar = (props: Props) => {
+const NavBar = ({ isDisableNavigateLink = false }: NavBarProps) => {
   const [isNavbarActive, setIsNavbarActive] = useState(false);
   const [isSearchFormActive, setIsSearchFormActive] = useState(false);
   const [isCartItemActive, setIsCartItemActive] = useState(false);
@@ -43,16 +46,18 @@ const NavBar = (props: Props) => {
 
   return (
     <header className={classes.header}>
-      <a href="#" className="logo">
-        <Image
-          src="/asset/images/logo.png"
-          alt="Main Logo"
-          width={75}
-          height={60}
-        />
-      </a>
+      <Link href="/">
+        <a className="logo">
+          <Image
+            src="/asset/images/logo.png"
+            alt="Main Logo"
+            width={75}
+            height={60}
+          />
+        </a>
+      </Link>
 
-      <nav className={`${classes.navbar} ${isNavbarActive ? "active" : ""}`}>
+      {!isDisableNavigateLink && <nav className={`${classes.navbar} ${isNavbarActive ? "active" : ""}`}>
         <a href="#home">home</a>
         <a href="#about">about</a>
         <a href="#menu">menu</a>
@@ -60,7 +65,7 @@ const NavBar = (props: Props) => {
         <a href="#review">review</a>
         <a href="#contact">contact</a>
         <a href="#blogs">blogs</a>
-      </nav>
+      </nav>}
 
       <div className={classes.icons}>
         <div
@@ -94,10 +99,11 @@ const NavBar = (props: Props) => {
       > {
           cartItems.map(
             (cartItem) => {
+              const itemInfo = cartItem.item;
 
-              const imagePath = getAbsoluteImagePath(cartItem.item.imagePath, MENU_ITEMS_IMGS_DIRECTORY);
+              const imagePath = getAbsoluteImagePath(itemInfo.imagePath, MENU_ITEMS_IMGS_DIRECTORY);
               return (
-                <div key={cartItem.item._id} className={classes.cartItem}>
+                <div key={itemInfo._id} className={classes.cartItem}>
                   <span className="fas fa-times"></span>
                   <Image
                     src={imagePath}
@@ -106,8 +112,8 @@ const NavBar = (props: Props) => {
                     alt="cart item"
                   />
                   <div className={classes.content}>
-                    <h3>{cartItem.item.name}</h3>
-                    <div className="price">{`$${cartItem.item.currentPrice}/ ${cartItem.quantity}`}</div>
+                    <h3>{itemInfo.name}</h3>
+                    <div className="price">{`$${itemInfo.currentPrice}/ ${cartItem.quantity}`}</div>
                   </div>
                 </div>
               )
