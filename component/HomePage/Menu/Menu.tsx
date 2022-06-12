@@ -15,9 +15,6 @@ interface MenuProps {
 const Menu = ({ menuItems = [] }: MenuProps) => {
   const { cartItems, addItemToCart } = useContext(CartContext)
 
-  console.log('cartItems', cartItems);
-
-
   return (
     <section className={classes.menu} id="menu">
 

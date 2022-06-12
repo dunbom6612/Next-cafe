@@ -1,17 +1,53 @@
 .blog {
   font-size: 3rem;
   color: #fff;
-  padding: 1.5rem 7%;
+}
+.blog .hero {
+  object-fit: cover;
+}
+
+.blog .author {
+  color: var(--main-color);
+  display: block;
+  padding-bottom: 1.6rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+.blog .author .name::after {
+  margin-left: 1.2rem;
+  margin-right: 1rem;
+  content: '';
+  display: inline-block;
+  background-color: currentColor;
+  height: 0.3rem;
+  width: 0.3rem;
+  opacity: 0.8;
+  border-radius: 50%;
+  vertical-align: 0.1875em;
+}
+.blog .content {
+  padding: 8rem 20%;
 }
 
 .blog .content h3 {
   font-size: 3rem;
   color: #fff;
+  padding: 2rem 0 1rem;
 }
 
 .blog .content p {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   color: #ccc;
   padding: 1rem 0;
   line-height: 1.8;
+}
+
+.blog .content ul {
+  font-size: 1.8rem;
+  color: #ccc;
+  padding: 1rem 1rem;
+  line-height: 1.8;
+}
+.blog .content ul li {
+  list-style-type: square;
 }

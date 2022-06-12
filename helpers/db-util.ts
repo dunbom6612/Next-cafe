@@ -2,20 +2,18 @@ import { MenuItem } from './../model/Menu';
 import { MongoClient, Sort } from 'mongodb';
 
 export async function connectDatabase() {
-  const client = await MongoClient.connect(
-    'mongodb+srv://sa:1234@cluster0.2eeea.mongodb.net/?retryWrites=true&w=majority'
-  );
+  const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.2eeea.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
+  const client = await MongoClient.connect(connectionString);
 
   return client;
 }
 
 export async function getAllDatas(
   client: MongoClient,
-  database: string,
   collection: string,
   sort: Sort
 ) {
-  const db = client.db(database);
+  const db = client.db();
 
   const datas = await db.collection(collection).find().sort(sort).toArray();
 

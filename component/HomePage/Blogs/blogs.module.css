@@ -9,7 +9,7 @@
 }
 
 .blogs .boxContainer .box .image {
-  height: 25rem;
+  height: 30rem;
   overflow: hidden;
   width: 100%;
 }
@@ -17,6 +17,7 @@
 .blogs .boxContainer .box .image img {
   height: 100%;
   object-fit: cover;
+  object-position: center;
   width: 100%;
 }
 

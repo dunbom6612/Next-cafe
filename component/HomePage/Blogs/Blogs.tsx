@@ -12,10 +12,6 @@ interface BlogsProps {
 }
 
 const Blogs = ({ blogs }: BlogsProps) => {
-
-  console.log('blogs', blogs);
-
-
   return (
     <section className={classes.blogs} id="blogs">
 
@@ -35,7 +31,7 @@ const Blogs = ({ blogs }: BlogsProps) => {
 
               <div key={blog.slug} className={classes.box}>
                 <div className={classes.image}>
-                  <Image width={536} height={250} src={imagePath} alt="blog image" />
+                  <Image width={536} height={250} src={imagePath} layout="responsive" alt="blog image" />
                 </div>
                 <div className={classes.content}>
                   <a href="#" className={classes.title}>{title}</a>
