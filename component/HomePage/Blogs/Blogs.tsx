@@ -25,8 +25,6 @@ const Blogs = ({ blogs }: BlogsProps) => {
             const parseDate = moment(date, 'YYYY-MM-DD')
             const imagePath = getAbsoluteImagePath(`/${slug}.jpeg`, `images/blogs/${slug}`)
 
-            console.log('imagePath', imagePath);
-
             return (
 
               <div key={blog.slug} className={classes.box}>
@@ -34,7 +32,7 @@ const Blogs = ({ blogs }: BlogsProps) => {
                   <Image width={536} height={250} src={imagePath} layout="responsive" alt="blog image" />
                 </div>
                 <div className={classes.content}>
-                  <a href="#" className={classes.title}>{title}</a>
+                  <a href={`/blog/${slug}`} className={classes.title}>{title}</a>
                   <span>{`by ${author} / ${parseDate.format('Do MMM, YYYY')}`}</span>
                   <p>{excerpt}</p>
                   <Link href={`/blog/${slug}`} className="btn">

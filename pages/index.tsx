@@ -48,6 +48,8 @@ export const getStaticProps = async () => {
   const menuItems = await getMenuItems();
   const blogs = getAllBlogs();
 
+  console.log('get all blogs data and menu items with getStaticProps');
+
   return {
     props: {
       menuItems: JSON.parse(JSON.stringify(menuItems)),

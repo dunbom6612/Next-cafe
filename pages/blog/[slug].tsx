@@ -96,6 +96,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { slug } = params;
   const data = getBlogData(slug as string);
 
+  console.log('get blog detail data with getServerSideProps');
+
   return {
     props: {
       blog: data,

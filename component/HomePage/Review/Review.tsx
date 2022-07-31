@@ -14,7 +14,7 @@ const Review = () => {
           <Image src="/asset/images/quote-img.png" alt="" className={classes.quote} height={43} width={58} />
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
           <Image src="/asset/images/pic-1.png" className={classes.user} alt="" height={70} width={70} />
-          <h3>john deo</h3>
+          <h3>john doe</h3>
           <div className={classes.stars}>
             <i className="fas fa-star"></i>
             <i className="fas fa-star"></i>
@@ -28,7 +28,7 @@ const Review = () => {
           <Image src="/asset/images/quote-img.png" alt="" className={classes.quote} height={43} width={58} />
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
           <Image src="/asset/images/pic-2.png" className={classes.user} alt="" height={70} width={70} />
-          <h3>john deo</h3>
+          <h3>john doe</h3>
           <div className={classes.stars}>
             <i className="fas fa-star"></i>
             <i className="fas fa-star"></i>
@@ -42,7 +42,7 @@ const Review = () => {
           <Image src="/asset/images/quote-img.png" alt="" className={classes.quote} height={43} width={58} />
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
           <Image src="/asset/images/pic-3.png" className={classes.user} alt="" height={70} width={70} />
-          <h3>john deo</h3>
+          <h3>john doe</h3>
           <div className={classes.stars}>
             <i className="fas fa-star"></i>
             <i className="fas fa-star"></i>

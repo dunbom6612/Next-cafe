@@ -9,14 +9,17 @@ type CartItem = {
 export interface CartContextProps {
   cartItems: CartItem[];
   addItemToCart: (newItem: MenuItem) => void;
+  resetCartItem: () => void
+
 };
 const CartContext = createContext<CartContextProps>({
   cartItems: [],
-  addItemToCart: () => { }
+  addItemToCart: () => { },
+  resetCartItem: () => { }
 });
 
 export const CartContextProvider = (props: any) => {
-  const [cartItems, setCardItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const addItemToCart = (newItem: MenuItem) => {
     const newListItems = [...cartItems];
@@ -27,19 +30,24 @@ export const CartContextProvider = (props: any) => {
       const foundItem = { ...newListItems[foundItemIndex] };
       foundItem.quantity++;
       newListItems.splice(foundItemIndex, 1, foundItem);
-      setCardItems(newListItems);
+      setCartItems(newListItems);
     } else {
       const addedItem: CartItem = {
         item: newItem,
         quantity: 1
       };
-      setCardItems([...newListItems, addedItem]);
+      setCartItems([...newListItems, addedItem]);
     }
   };
 
+  const resetCartItem = () => {
+    setCartItems([]);
+  }
+
   const context = {
-    cartItems: cartItems,
-    addItemToCart: addItemToCart
+    cartItems,
+    addItemToCart,
+    resetCartItem
   };
 
   return (

@@ -15,7 +15,7 @@ const NavBar = ({ isDisableNavigateLink = false }: NavBarProps) => {
   const [isSearchFormActive, setIsSearchFormActive] = useState(false);
   const [isCartItemActive, setIsCartItemActive] = useState(false);
 
-  const { cartItems } = useContext(CartContext)
+  const { cartItems, resetCartItem } = useContext(CartContext)
 
 
   useEffect(() => {
@@ -43,6 +43,14 @@ const NavBar = ({ isDisableNavigateLink = false }: NavBarProps) => {
     setIsNavbarActive(false);
     setIsSearchFormActive(false);
   };
+
+  const onClickCheckout = () => {
+    const total = cartItems.reduce((sum, cartItem) => { return sum + (Number.parseFloat(cartItem.item.currentPrice) * cartItem.quantity) }, 0.00)
+    const checkoutMessageContent = cartItems.length > 0 ? `Checkout successfully!\nYour total bill is ${total}$` : 'Please get some item.'
+    alert(checkoutMessageContent)
+    resetCartItem();
+    setIsNavbarActive(false);
+  }
 
   return (
     <header className={classes.header}>
@@ -121,9 +129,9 @@ const NavBar = ({ isDisableNavigateLink = false }: NavBarProps) => {
           )
         }
 
-        <a href="#" className="btn">
+        <button className="btn" onClick={onClickCheckout}>
           checkout now
-        </a>
+        </button>
       </div>
     </header>
   );
